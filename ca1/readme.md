@@ -54,7 +54,7 @@ End Date: 13, March
 
 #### Step 1: Ensure you're starting on master branch
 
-- git checkout master
+- git checkout main
 
 #### Step 2: Create a new branch named "email-field"
 
@@ -63,4 +63,12 @@ End Date: 13, March
 #### Step 3: Implement the new email field feature
 
 - Same steps as Part 1 - Step 3
+- Commit the changes and tag
+  1. git add .
+  2. git commit -m "Add email field to Employee"
+  3. git checkout main
+  4. git merge email-field
+  5. git tag -a v1.3.0 -m "Release version 1.3.0 with email field feature"
+  6. git push origin master
+  7. git push origin v1.3.0
 
