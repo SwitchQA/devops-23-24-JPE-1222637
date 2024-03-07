@@ -9,8 +9,14 @@ End Date: 13, March
 ### Part 1
 
 #### Step 1: Copy the code of the Tutorial React.js and Spring Data REST Application into a new folder named CA1
- 
+
+- Create a repository in GitHub named ca1
+- git clone that repository
 - Copy the folder "Basic", and the pom.xml file from the root of the project located in https://github.com/spring-guides/tut-react-and-spring-data-rest
+- Paste on the root of the ca1 repository
+- git add .
+- git commit -m "Initial commit"
+- git push origin main
 
 #### Step 2: We should use tags to mark the versions of the application. You should use a pattern like: major.minor.revision (e.g., 1.1.0).
 - git tag v.1.1.0
@@ -41,4 +47,20 @@ End Date: 13, March
 
 ##### Notes:
 
-- Tests and validations should be done for the rest of the Employee fields but it's beyond the scope of this assignment.
+- On Step 1 it would also be valid to use git init locally and then create the repository in GitHub.
+- Tests and validations should be done for the rest of the Employee fields, but it's beyond the scope of this assignment.
+
+### Part 2
+
+#### Step 1: Ensure you're starting on master branch
+
+- git checkout master
+
+#### Step 2: Create a new branch named "email-field"
+
+- git checkout -b email-field
+
+#### Step 3: Implement the new email field feature
+
+- Same steps as Part 1 - Step 3
+
