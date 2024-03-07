@@ -43,4 +43,20 @@ public class EmployeeTest {
         assertThrows(IllegalArgumentException.class, () -> new Employee("John", "Doe", "Software Engineer", -1));
     }
 
+    @Test
+    public void testGetJobYears() {
+        Employee employee = new Employee("John", "Doe", "Software Engineer", 5);
+        int expected = 5;
+        int result = employee.getJobYears();
+        assertEquals(expected, result);
+    }
+
+    @Test
+    public void testSetJobYears() {
+        Employee employee = new Employee("John", "Doe", "Software Engineer", 5);
+        employee.setJobYears(10);
+        int expected = 10;
+        int result = employee.getJobYears();
+        assertEquals(expected, result);
+    }
 }
