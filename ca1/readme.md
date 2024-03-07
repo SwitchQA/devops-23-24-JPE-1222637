@@ -72,3 +72,13 @@ End Date: 13, March
   6. git push origin main
   7. git push origin v1.3.0
 
+#### Step 4: Create a new branch for fixing bugs 
+
+- git checkout -b fix-invalid-email
+- git add .
+- git commit -m "Fix email validation to ensure presence of '@'"
+- git checkout main
+- git merge fix-invalid-email
+- git tag -a v1.3.1 -m "Release version 1.3.1 with email validation fix"
+- git push origin main
+- git push origin v1.3.1

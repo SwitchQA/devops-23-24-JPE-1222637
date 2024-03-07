@@ -81,4 +81,9 @@ public class EmployeeTest {
         String result = employee.getEmail();
         assertEquals(expected, result);
     }
+
+    @Test
+    public void testEmailWithInvalidFormat() {
+        assertThrows(IllegalArgumentException.class, () -> new Employee("John", "Doe", "Software Engineer", 5, "email"));
+    }
 }

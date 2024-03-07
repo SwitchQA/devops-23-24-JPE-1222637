@@ -111,9 +111,14 @@ public class Employee {
 		return email;
 	}
 	public void setEmail(String email) {
+		String emailPattern = "^[a-zA-Z0-9_+&*-]+(?:\\.[a-zA-Z0-9_+&*-]+)*@(?:[a-zA-Z0-9-]+\\.)+[a-zA-Z]{2,7}$";
 		if (email == null || email.trim().isEmpty()) {
 			throw new IllegalArgumentException("Please enter a valid email.");
 		}
+		if (!email.matches(emailPattern)) {
+			throw new IllegalArgumentException("Please enter a valid email.");
+		}
+
 		this.email = email;
 	}
 
