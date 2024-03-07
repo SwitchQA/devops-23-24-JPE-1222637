@@ -69,6 +69,6 @@ End Date: 13, March
   3. git checkout main
   4. git merge email-field
   5. git tag -a v1.3.0 -m "Release version 1.3.0 with email field feature"
-  6. git push origin master
+  6. git push origin main
   7. git push origin v1.3.0
 
