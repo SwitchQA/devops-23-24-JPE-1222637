@@ -32,13 +32,15 @@ public class Employee {
 	private String firstName;
 	private String lastName;
 	private String description;
+	private int jobYears;
 
 	private Employee() {}
 
-	public Employee(String firstName, String lastName, String description) {
-		this.firstName = firstName;
-		this.lastName = lastName;
-		this.description = description;
+	public Employee(String firstName, String lastName, String description, int jobYears) {
+		setFirstName(firstName);
+		setLastName(lastName);
+		setDescription(description);
+		setJobYears(jobYears);
 	}
 
 	@Override
@@ -49,13 +51,14 @@ public class Employee {
 		return Objects.equals(id, employee.id) &&
 			Objects.equals(firstName, employee.firstName) &&
 			Objects.equals(lastName, employee.lastName) &&
-			Objects.equals(description, employee.description);
+			Objects.equals(description, employee.description) &&
+			jobYears == employee.jobYears;
 	}
 
 	@Override
 	public int hashCode() {
 
-		return Objects.hash(id, firstName, lastName, description);
+		return Objects.hash(id, firstName, lastName, description, jobYears);
 	}
 
 	public Long getId() {
@@ -90,6 +93,17 @@ public class Employee {
 		this.description = description;
 	}
 
+	public int getJobYears() {
+		return jobYears;
+	}
+
+	public void setJobYears(int jobYears) throws IllegalArgumentException {
+		if (jobYears < 0) {
+			throw new IllegalArgumentException("Please enter a valid number of years.");
+		}
+		this.jobYears = jobYears;
+	}
+
 	@Override
 	public String toString() {
 		return "Employee{" +
@@ -97,6 +111,7 @@ public class Employee {
 			", firstName='" + firstName + '\'' +
 			", lastName='" + lastName + '\'' +
 			", description='" + description + '\'' +
+			", jobYears='" + jobYears + '\'' +
 			'}';
 	}
 }
