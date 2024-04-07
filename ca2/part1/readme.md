@@ -42,6 +42,24 @@ task runServer(type:JavaExec, dependsOn: classes){
 
 #### Task 2: Add a simple unit test and update the gradle script so that it is able to execute the test.
 * The unit tests require junit 4.12 to execute. Dot not forget to add this dependency in gradle.
+```groovy
+dependencies {
+    testImplementation 'org.junit.jupiter:junit-jupiter-api:5.7.0'
+    testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.7.0'
+}
+```
+
+- Add JUnit platform to run tests
+```groovy
+test{
+    useJUnitPlatform()
+}
+```
+
+- From this point running the following command is enough to run unit tests with gradle
+```cmd
+./gradlew test
+```
 
 #### Task 3: Add a new task of type Copy to be used to make a backup of the sources of the application.
 Note: It should copy the contents of the src folder to a new backup folder.
