@@ -83,7 +83,32 @@ task backupSources(type: Copy) {
 ./gradlew backupSources
 ```
 
+* After running the task it should show as such
+  ![task4](tut_resources/task3.png)
+
 
 #### Task 4: Add a new task of type Zip to be used to make an archive (i.e., zip file) of the sources of the application.
 Note: It should copy the contents of the src folder to a new zip file.
 
+* Add a new task to build.gradle
+
+```groovy
+task zipSources(type: Zip) {
+    archiveBaseName.set('application-sources')
+    archiveVersion.set('1.0')
+    destinationDirectory.set(file("${buildDir}/archives"))
+    from 'src'
+}
+```
+
+* This will create a zip file with the name application-sources-1.0.zip in the archives folder in the build directory.
+* Define the base name of the archive, the version, the destination directory, and the source of the files to be zipped.
+
+* Run the task with the following command
+```cmd
+./gradlew zipSources
+```
+
+* After running the task it should show as such
+
+![task4](tut_resources/task4.png)
