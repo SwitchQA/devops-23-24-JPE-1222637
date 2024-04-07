@@ -85,3 +85,10 @@ task backupSources(type: Copy) {
     into "${buildDir}/backup/sources-${version}-${new Date().format('yyyyMMddHHmmss')}"
 }
 
+task zipSources(type: Zip) {
+    archiveBaseName.set('application-sources')
+    archiveVersion.set('1.0')
+    destinationDirectory.set(file("${buildDir}/archives"))
+    from 'src'
+}
+
