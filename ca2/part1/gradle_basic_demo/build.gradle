@@ -77,3 +77,11 @@ task runServer(type:JavaExec, dependsOn: classes){
     args '59001'
 
 }
+
+task backupSources(type: Copy) {
+    from 'src/main/java/basic_demo'
+    from 'src/main/resources'
+    into "${buildDir}/backup/sources"
+    into "${buildDir}/backup/sources-${version}-${new Date().format('yyyyMMddHHmmss')}"
+}
+

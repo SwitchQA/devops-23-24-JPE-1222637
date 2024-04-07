@@ -49,14 +49,14 @@ dependencies {
 }
 ```
 
-- Add JUnit platform to run tests
+* Add JUnit platform to run tests
 ```groovy
 test{
     useJUnitPlatform()
 }
 ```
 
-- From this point running the following command is enough to run unit tests with gradle
+* From this point running the following command is enough to run unit tests with gradle
 ```cmd
 ./gradlew test
 ```
@@ -64,7 +64,25 @@ test{
 #### Task 3: Add a new task of type Copy to be used to make a backup of the sources of the application.
 Note: It should copy the contents of the src folder to a new backup folder.
 
-* 
+* Add a new task to build.gradle
+
+```groovy
+task backupSources(type: Copy) {
+    from 'src/main/java/basic_demo'
+    from 'src/main/resources'
+    into "${buildDir}/backup/sources"
+    into "${buildDir}/backup/sources-${version}-${new Date().format('yyyyMMddHHmmss')}"
+}
+```
+
+* This will target basic_demo and resources folder, and copy them to a new folder in the build directory.
+* The new folder will have the current version and the current date and time.
+
+* Run the task with the following command
+```cmd
+./gradlew backupSources
+```
+
 
 #### Task 4: Add a new task of type Zip to be used to make an archive (i.e., zip file) of the sources of the application.
 Note: It should copy the contents of the src folder to a new zip file.
