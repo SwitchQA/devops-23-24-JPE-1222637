@@ -2,7 +2,7 @@
 
 Start Date: 14, March
 
-End Date: 3, April
+End Date: 8, April
 
 [Git Repository](https://github.com/SwitchQA/devops-23-24-JPE-1222637)
 
