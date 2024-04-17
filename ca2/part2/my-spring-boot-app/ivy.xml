@@ -1,0 +1,10 @@
+<ivy-module version="2.0">
+    <info organisation="com.greglturnquist" module="react-and-spring-data-rest"/>
+    <dependencies>
+        <!-- Versions are as per Spring Boot 2.2.4.RELEASE compatibility -->
+        <dependency org="org.springframework.boot" name="spring-boot-starter-thymeleaf" rev="2.2.4.RELEASE"/>
+        <dependency org="org.springframework.boot" name="spring-boot-starter-data-jpa" rev="2.2.4.RELEASE"/>
+        <dependency org="org.springframework.boot" name="spring-boot-starter-data-rest" rev="2.2.4.RELEASE"/>
+        <dependency org="com.h2database" name="h2" rev="1.4.200" conf="runtime"/>
+    </dependencies>
+</ivy-module>

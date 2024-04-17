@@ -1,0 +1,64 @@
+<project name="my-spring-boot-app" default="package" xmlns:ivy="antlib:org.apache.ivy.ant" basedir=".">
+    <!-- Set global properties for this build -->
+    <property name="src.dir" value="src/main/java"/>
+    <property name="resources.dir" value="src/main/resources"/>
+    <property name="test.dir" value="src/test/java"/>
+    <property name="build.dir" value="build"/>
+    <property name="dist.dir" value="dist"/>
+    <property name="ant.lib.dir" value="lib"/>
+
+    <target name="init-ivy">
+        <taskdef resource="org/apache/ivy/ant/antlib.xml" uri="antlib:org.apache.ivy.ant" classpath="lib/ivy-2.5.2.jar"/>
+    </target>
+
+    <target name="resolve" depends="init-ivy" description="Retrieve dependencies with Ivy">
+        <ivy:retrieve pattern="lib/[artifact]-[revision](-[classifier]).[ext]" />
+    </target>
+
+    <target name="init">
+        <!-- Create the build directory structure used by compile -->
+        <mkdir dir="${build.dir}"/>
+        <mkdir dir="${dist.dir}"/>
+    </target>
+
+    <target name="compile" depends="init">
+        <!-- Compiles the Java source code -->
+        <javac srcdir="${src.dir}" destdir="${build.dir}">
+            <classpath>
+                <fileset dir="lib" includes="*.jar"/>
+            </classpath>
+        </javac>
+        <!-- Copy non-Java resources -->
+        <copy todir="${build.dir}">
+            <fileset dir="${resources.dir}" excludes="**/*.java"/>
+        </copy>
+    </target>
+
+    <target name="package" depends="compile, build-frontend">
+        <!-- Packages the application into a JAR file -->
+        <jar destfile="${dist.dir}/my-app.jar" basedir="${build.dir}">
+            <manifest>
+                <attribute name="Main-Class" value="com.greglturnquist.payroll.ReactAndSpringDataRestApplication"/>
+            </manifest>
+        </jar>
+    </target>
+
+    <target name="clean">
+        <!-- Deletes the build and dist directory -->
+        <delete dir="${build.dir}"/>
+        <delete dir="${dist.dir}"/>
+    </target>
+
+    <target name="build-frontend" depends="init">
+        <!-- Installs frontend dependencies -->
+        <exec executable="npm" dir="src/main/js">
+            <arg value="install"/>
+        </exec>
+        <!-- Runs the frontend build script -->
+        <exec executable="npm" dir="src/main/js">
+            <arg value="run"/>
+            <arg value="build"/>
+        </exec>
+    </target>
+
+</project>
