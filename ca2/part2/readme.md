@@ -81,3 +81,7 @@ clean.dependsOn cleanWebpack
 
 * Finally run ```./gradlew clean```
 
+#### Step 3: Alternative 
+
+* Ant is implemented on a separate published branch and not merged with main because it's not concluded.
+
