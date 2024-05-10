@@ -35,6 +35,13 @@ frontend {
 	checkScript = "run check"
 }
 
+task bootRun(type: BootRun) {
+	doFirst {
+		dependsOn 'cleanWebpack'
+		dependsOn 'webpack'
+	}
+}
+
 task copyJarToDist(type: Copy) {
 	dependsOn build
 	from('build/libs')
