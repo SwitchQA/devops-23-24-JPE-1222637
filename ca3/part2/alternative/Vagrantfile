@@ -1,0 +1,32 @@
+# Vagrantfile
+Vagrant.configure("2") do |config|
+  # Docker provider configuration for the database
+  config.vm.define "db", primary: true do |db|
+    db.vm.provider "docker" do |d|
+      d.image = "oscarfonts/h2"
+      d.has_ssh = false
+      d.ports = ["8082:8082", "9092:9092"]
+      d.volumes = ["C:/Users/luisa/Documents/Switch_Dev/devops-23-24-JPE-1222637/ca3/part2/alternative/data/h2:/h2"]
+    end
+  end
+
+  # Docker provider configuration for the webserver
+  config.vm.define "web" do |web|
+    web.vm.provider "docker" do |d|
+      d.image = "tomcat:9-jdk17-openjdk"
+      d.has_ssh = false
+      d.ports = ["8080:8080"]
+      d.create_args = ["--memory", "1024m"]
+    end
+
+    # Web server setup with shell provisioner
+    web.vm.provision "shell", inline: <<-SHELL
+      apt-get update && apt-get install -y git
+      git clone https://github.com/SwitchQA/devops-23-24-JPE-1222637.git
+      cd devops-23-24-JPE-1222637/ca2/part2/react-and-spring-rest-data-basic
+      chmod +x gradlew
+      ./gradlew clean build
+      ./gradlew bootRun
+    SHELL
+  end
+end

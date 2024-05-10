@@ -63,3 +63,22 @@ client({method: 'GET', path: '/basic-0.0.1-SNAPSHOT/api/employees'}).done(respon
 ```
 NOTES: If anything goes wrong with ```vagrant up``` you can always run ```vagrant destroy``` and try again
 
+## Part 2.1 - An alternative to VirtualBox using Vagrant.
+
+* For our alternative we'll use Docker.
+* We've considered using Hyper-V but it's not available on Windows 10 Home
+
+* First we'll need to install Docker
+* Go to https://docs.docker.com/get-docker/
+* Download and install Docker Desktop
+* To check if everything is ok type ```docker -v```
+
+* Update the Vagrantfile to use the Docker provider
+```
+Vagrant.configure("2") do |config|
+  config.vm.provider "docker" do |d|
+    d.image = "ubuntu:latest"
+  end
+end
+```
+
