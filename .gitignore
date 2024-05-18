@@ -7,6 +7,7 @@
 
 # User-specific stuff
 lib/
+/ca3/part2/.vagrant
 .idea
 .idea/**/workspace.xml
 .idea/**/tasks.xml

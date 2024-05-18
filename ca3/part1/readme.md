@@ -25,7 +25,7 @@ End Date: 15, May
 * Install the following packages:
     * Update the packages repositories
    ```bash
-  sudoapt update
+  sudo apt update
   ```
     * Install the networks tools
     ```bash
@@ -96,11 +96,29 @@ End Date: 15, May
   sudo apt install maven
   mvn -version
   ```
+  
+* Install Gradle
+ ```bash
+        wget https://services.gradle.org/distributions/gradle-8.6-bin.zip
+    sudo mkdir /opt/gradle
+    sudo unzip -d /opt/gradle gradle-8.6-bin.zip
+    echo "export GRADLE_HOME=/opt/gradle/gradle-8.6" >> ~/.bashrc
+    echo "export PATH=$PATH:$GRADLE_HOME/bin" >> ~/.bashrc
+    source ~/.bashrc
+    gradle -v
+ ```
+* Note: if it did not install properly, please verify bashrc file by doing 
+```bash
+sudo nano ~/.bashrc
+```
+
+* Now that everything is set up, let's clone our repository
+    
 * git clone https://github.com/SwitchQA/devops-23-24-JPE-1222637.git (you may substitute this for your own repo)
   (repository must be public)
 
 * Now let's test our application with Maven
-  * Nagivate the repository to the folder where mvnw is located
+  * Navigate the repository to the folder where mvnw is located
     ```bash
     cd devops-23-24-JPE-1222637/ca1/basic
     chmod +x mvnw
@@ -117,7 +135,7 @@ End Date: 15, May
     * On your browser input the IP address and port number
 
   * Next, let's try our Gradle application
-  * First give graddle wrapper permissions to execute
+  * First give gradle wrapper permissions to execute
   * Change the folder path accordingly
     ```bash
     cd devops-23-24-JPE-1222637/ca2/part1/gradle_basic_demo
