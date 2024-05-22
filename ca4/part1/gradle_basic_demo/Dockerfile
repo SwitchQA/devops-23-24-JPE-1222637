@@ -1,11 +1,6 @@
-FROM openjdk:17-jdk-slim
-
+FROM gradle:8.7.0-jdk17 AS build
 WORKDIR /app
-
 COPY . /app
-
-RUN chmod +x gradlew
-
+RUN gradle build
 EXPOSE 59001
-
-CMD ["./gradlew", "runServer"]
+CMD ["gradle", "runServer"]

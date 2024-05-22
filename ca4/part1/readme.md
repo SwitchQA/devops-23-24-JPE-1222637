@@ -45,6 +45,14 @@ FROM openjdk:17-jdk-slim
 FROM gradle:8.7.0-jdk17 AS build
 ```
 
+* We can also simply use a JAVA 17 image and then install Gradle
+
+```Dockerfile
+FROM openjdk:17-jdk-slim
+RUN apt-get update && apt-get install -y curl unzip
+RUN bash -c "source $HOME/.sdkman/bin/sdkman-init.sh && sdk install gradle 8.7" \
+```
+
 * If by change the Docker Hub, or any other registry we might be using didn't had our specified requirements
   we could build our own image with the required dependencies and use that as the base image.
   To keep this short I won't demonstrate that option.
@@ -78,17 +86,12 @@ COPY . /app
 * With all of this we should end up with a Dockerfile similar to this
 
 ```Dockerfile
-FROM openjdk:17-jdk-slim
-
+FROM gradle:8.7.0-jdk17 AS build
 WORKDIR /app
-
 COPY . /app
-
-RUN chmod +x gradlew
-
+RUN gradle build
 EXPOSE 59001
-
-CMD ["./gradlew", "runServer"]
+CMD ["gradle", "runServer"]
 ```
 
 * Now to execute this, enter a terminal inside the root folder of the project and run the following command
