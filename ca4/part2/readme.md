@@ -128,5 +128,10 @@ docker-compose down
 
 * Unlike docker stop, docker-compose down stops and removes all the containers, and networks created by docker-compose up.
 
+* The images are now available in Docker Hub
+* Please check here
+
+https://hub.docker.com/u/luisafonsoisep
+
 
 
