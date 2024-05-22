@@ -1,0 +1,6 @@
+FROM gradle:7.6.2-jdk17
+WORKDIR /app
+COPY . /app
+RUN gradle clean build
+EXPOSE 8080
+CMD ["java", "-jar", "build/libs/basic-0.0.1-SNAPSHOT.war"]
