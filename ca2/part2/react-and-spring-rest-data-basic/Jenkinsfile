@@ -59,8 +59,12 @@ pipeline {
                 echo 'Building and pushing Docker image...'
                 dir('ca2/part2/react-and-spring-rest-data-basic') {
                     script {
+                        // Building the Docker image with a tag that includes the build number
+                        def appImage = docker.build("luisafonsoisep/springboot-app:${env.BUILD_NUMBER}")
                         docker.withRegistry('https://registry.hub.docker.com', 'docker-hub-credentials') {
-                            docker.build(DOCKER_IMAGE).push()
+                            // Pushing the image using the tagged image name
+                            appImage.push()
+                            echo "Building image with tag: luisafonsoisep/springboot-app:${env.BUILD_NUMBER}"
                         }
                     }
                 }
