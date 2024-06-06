@@ -1,0 +1,69 @@
+pipeline {
+    agent any
+
+    environment {
+        DOCKER_IMAGE = 'luisafonsoisep/springboot-app:${BUILD_NUMBER}'
+    }
+
+    stages {
+        stage('Checkout') {
+            steps {
+                echo 'Checking out code from the repository'
+                git branch: 'main', url: 'https://github.com/SwitchQA/devops-23-24-JPE-1222637.git'
+            }
+        }
+        stage('Assemble') {
+            steps {
+                echo 'Assembling application...'
+                dir('ca2/part2/react-and-spring-rest-data-basic') {
+                    sh './gradlew clean assemble'
+                }
+            }
+        }
+        stage('Test') {
+            steps {
+                echo 'Running tests...'
+                dir('ca2/part2/react-and-spring-rest-data-basic') {
+                    sh './gradlew test'
+                    junit 'build/test-results/test/*.xml'
+                }
+            }
+        }
+        stage('Javadoc') {
+            steps {
+                echo 'Generating Javadoc...'
+                dir('ca2/part2/react-and-spring-rest-data-basic') {
+                    sh './gradlew javadoc'
+                    publishHTML(target: [
+                        allowMissing: false,
+                        alwaysLinkToLastBuild: true,
+                        keepAll: true,
+                        reportDir: 'build/docs/javadoc',
+                        reportFiles: 'index.html',
+                        reportName: 'Javadoc'
+                    ])
+                }
+            }
+        }
+        stage('Archive') {
+            steps {
+                echo 'Archiving artifacts...'
+                dir('ca2/part2/react-and-spring-rest-data-basic') {
+                    archiveArtifacts 'build/libs/*.war'
+                }
+            }
+        }
+        stage('Publish Image') {
+            steps {
+                echo 'Building and pushing Docker image...'
+                dir('ca2/part2/react-and-spring-rest-data-basic') {
+                    script {
+                        docker.withRegistry('https://registry.hub.docker.com', 'docker-hub-credentials') {
+                            docker.build(DOCKER_IMAGE).push()
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
