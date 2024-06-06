@@ -50,7 +50,7 @@ pipeline {
             steps {
                 echo 'Archiving artifacts...'
                 dir('ca2/part2/react-and-spring-rest-data-basic') {
-                    archiveArtifacts 'build/libs/*.war'
+                    archiveArtifacts 'build/libs/*.jar'
                 }
             }
         }
