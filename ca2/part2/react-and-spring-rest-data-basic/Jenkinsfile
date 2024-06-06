@@ -16,6 +16,7 @@ pipeline {
             steps {
                 echo 'Assembling application...'
                 dir('ca2/part2/react-and-spring-rest-data-basic') {
+                    sh 'chmod +x ./gradlew'
                     sh './gradlew clean assemble'
                 }
             }
