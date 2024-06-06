@@ -25,15 +25,8 @@ dependencies {
     // Use Apache Log4J for logging
     implementation group: 'org.apache.logging.log4j', name: 'log4j-api', version: '2.11.2'
     implementation group: 'org.apache.logging.log4j', name: 'log4j-core', version: '2.11.2'
-    // Add JUnit Jupiter API and Engine for unit tests
-    testImplementation 'org.junit.jupiter:junit-jupiter-api:5.7.0'
-    testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.7.0'
+    testImplementation group: 'junit', name: 'junit', version: '4.12'
 }
-
-test{
-    useJUnitPlatform()
-}
- 
 
 // Define the main class for the application
 mainClassName = 'basic_demo.App'
@@ -63,10 +56,9 @@ task runClient(type:JavaExec, dependsOn: classes){
     mainClass = 'basic_demo.ChatClientApp'
 
     args 'localhost', '59001'
-
 }
 
-task runServer(type:JavaExec, dependsOn: classes){
+task runServer (type:JavaExec, dependsOn: classes){
     group = "DevOps"
     description = "Launches a chat server that listens on port 59001"
 
@@ -75,20 +67,18 @@ task runServer(type:JavaExec, dependsOn: classes){
     mainClass = 'basic_demo.ChatServerApp'
 
     args '59001'
-
 }
 
-task backupSources(type: Copy) {
-    from 'src/main/java/basic_demo'
-    from 'src/main/resources'
-    into "${buildDir}/backup/sources"
-    into "${buildDir}/backup/sources-${version}-${new Date().format('yyyyMMddHHmmss')}"
-}
 
-task zipSources(type: Zip) {
-    archiveBaseName.set('application-sources')
-    archiveVersion.set('1.0')
-    destinationDirectory.set(file("${buildDir}/archives"))
+task backup(type: Copy) {
     from 'src'
+    into 'backup'
 }
+
+task createZip(type: Zip) {
+    from 'src'
+    archiveFileName = 'src.zip'
+    destinationDirectory = file('zipFile')
+}
+
 
